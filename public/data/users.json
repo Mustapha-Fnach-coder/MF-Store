@@ -1,0 +1,45 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "password": "hashedpassword123",
+      "role": "user",
+      "purchases": [
+        {
+          "productId": 1,
+          "productName": "JBL Live 660NC",
+          "quantity": 1,
+          "purchaseDate": "2024-11-20"
+        },
+        {
+          "productId": 3,
+          "productName": "boAt Airdopes 131",
+          "quantity": 2,
+          "purchaseDate": "2024-10-15"
+        }
+      ],
+      "wishlist": [2, 5, 6],
+      "ratingsGiven": 10,
+      "comments": ["Great product!", "Amazing sound quality."]
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "password": "hashedpassword456",
+      "role": "user",
+      "purchases": [
+        {
+          "productId": 4,
+          "productName": "boAt BassHeads 110",
+          "quantity": 1,
+          "purchaseDate": "2024-11-10"
+        }
+      ],
+      "wishlist": [1, 3, 7],
+      "ratingsGiven": 7,
+      "comments": ["Good value for money.", "Will buy again!"]
+    }
+  ]
+  

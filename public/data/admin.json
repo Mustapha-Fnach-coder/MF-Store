@@ -1,0 +1,26 @@
+
+[
+    {
+      "id": 1,
+      "name": "Admin One",
+      "email": "admin1@example.com",
+      "password": "hashedpasswordadmin1",
+      "role": "admin",
+      "profilePicture": "../../src/assets/img/admin1.png",
+      "permissions": ["manage_users", "manage_products", "view_reports"],
+      "lastLogin": "2024-11-20T10:30:00",
+      "tasks": ["Approve new products", "Monitor user activity"]
+    },
+    {
+      "id": 2,
+      "name": "Admin Two",
+      "email": "admin2@example.com",
+      "password": "hashedpasswordadmin2",
+      "role": "admin",
+      "profilePicture": "../../src/assets/img/admin2.png",
+      "permissions": ["manage_orders", "view_reports"],
+      "lastLogin": "2024-11-19T15:45:00",
+      "tasks": ["Resolve customer complaints", "Generate sales reports"]
+    }
+  ]
+  

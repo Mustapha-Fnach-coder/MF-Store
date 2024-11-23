@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "customerName": "Jean Dupont",
+      "items": [
+        { "id": 101, "name": "Produit A", "quantity": 2 },
+        { "id": 102, "name": "Produit B", "quantity": 1 }
+      ],
+      "status": "Pending",
+      "totalPrice": 45.50
+    },
+    {
+      "id": 2,
+      "customerName": "Alice Martin",
+      "items": [
+        { "id": 103, "name": "Produit C", "quantity": 3 }
+      ],
+      "status": "Shipped",
+      "totalPrice": 30.00
+    },
+    {
+      "id": 3,
+      "customerName": "Michel Leroy",
+      "items": [
+        { "id": 104, "name": "Produit D", "quantity": 1 },
+        { "id": 105, "name": "Produit E", "quantity": 4 }
+      ],
+      "status": "Delivered",
+      "totalPrice": 75.00
+    },
+    {
+      "id": 4,
+      "customerName": "Sophie Bernard",
+      "items": [
+        { "id": 106, "name": "Produit F", "quantity": 2 },
+        { "id": 107, "name": "Produit G", "quantity": 3 }
+      ],
+      "status": "Cancelled",
+      "totalPrice": 50.00
+    }
+  ]
+  
