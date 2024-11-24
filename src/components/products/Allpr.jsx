@@ -3,6 +3,7 @@ import useFetchData from "/public/data/DATA.JS";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/cartcontexte";
 import { toast, ToastContainer } from "react-toastify"; // Import Toastify
+import { useTranslation } from 'react-i18next'; // Import de useTranslation
 import "react-toastify/dist/ReactToastify.css"; // Import des styles
 
 const AllPr = () => {
@@ -12,6 +13,8 @@ const AllPr = () => {
   const [priceRange, setPriceRange] = useState([0, 15000]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [orderBy, setOrderBy] = useState("");
+
+  const { t } = useTranslation(); // Utilisation du hook de traduction
 
   const toggleBrand = (brand) => {
     setSelectedBrands((prev) =>
@@ -27,7 +30,7 @@ const AllPr = () => {
       payload: item,
     });
     
-    toast.success("Product added ", {
+    toast.success(t('productAdded'), { // Utilisation de la traduction
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -61,11 +64,11 @@ const AllPr = () => {
 
   return (
     <div>
-      <ToastContainer /> 
+      <ToastContainer />
 
       <div>
         <h1 className="text-slate-500 font-semibold text-light p-4 rounded-md mt- mb-5 text-3xl">
-          Tous les produits
+          {t('products')}
         </h1>
         <div className="flex flex-wrap gap-2 justify-center">
           {["All", "Headphones", "Earbuds", "Earphones", "Neckbands"].map((category) => (
@@ -83,28 +86,28 @@ const AllPr = () => {
       <div className="flex">
         
         <div className="w-64 p-4 mb-52 rounded-sm shadow-md border-r border-gray-300 h-screen">
-          <h2 className="text-lg font-bold mb-4">Filtres</h2>
+          <h2 className="text-lg font-bold mb-4">{t('filters')}</h2>
           
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Trier par prix</label>
+            <label className="block text-sm font-medium mb-2">{t('sortByPrice')}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setOrderBy("asc")}
                 className={`px-4 py-2 rounded ${orderBy === "asc" ? "bg-gray-600 text-white" : "bg-gray-200"}`}
               >
-                Croissant
+                {t('ascending')}
               </button>
               <button
                 onClick={() => setOrderBy("desc")}
                 className={`px-4 py-2 rounded ${orderBy === "desc" ? "bg-gray-600 text-white" : "bg-gray-200"}`}
               >
-                Décroissant
+                {t('descending')}
               </button>
             </div>
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Prix</label>
+            <label className="block text-sm font-medium mb-2">{t('price')}</label>
             <input
               type="range"
               min="0"
@@ -117,7 +120,7 @@ const AllPr = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Marques</label>
+            <label className="block text-sm font-medium mb-2">{t('brands')}</label>
             {["JBL", "boAt", "Sony"].map((brand) => (
               <button
                 key={brand}
@@ -151,7 +154,7 @@ const AllPr = () => {
                     : "bg-slate-600 hover:bg-slate-300"
                 }`}
               >
-                {isItemInCart(product.id) ? "Added" : "Add To Cart"}
+                {isItemInCart(product.id) ? t('productAdded') : t('addToCart')}
               </button>
             </div>
           ))}

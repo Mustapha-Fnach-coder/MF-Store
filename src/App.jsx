@@ -10,7 +10,7 @@ import CartProvider from "./components/context/cartcontexte";
 import Dashboard from "./admin/dashboard";
 import AllPr from "./components/products/ALLpr";
 import CartPage from "./components/cart/cart";
-
+import PaymentForm from "./components/layouts/payment";
 import ProductDetails from "./components/products/ProductDetails";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -37,6 +37,7 @@ function App() {
           <Route path="/allproducts" element={<AllPr />} />
           <Route path="/cartpage" element={<CartPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/payment" element={<PaymentForm />} />
           
 
 

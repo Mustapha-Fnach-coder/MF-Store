@@ -4,6 +4,7 @@ import useFetchData from '/public/data/DATA.JS';
 import { CartContext } from "../context/cartcontexte";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next'; // Import de useTranslation
 
 const AllProducts = () => {
     const { data } = useFetchData();
@@ -13,6 +14,7 @@ const AllProducts = () => {
     const [orderBy, setOrderBy] = useState("");
 
     const { dispatch, state } = useContext(CartContext);
+    const { t } = useTranslation(); // Utilisation du hook useTranslation
 
     const toggleBrand = (brand) => {
         setSelectedBrands((prev) =>
@@ -28,8 +30,8 @@ const AllProducts = () => {
             payload: item,
         });
 
-        // Show toast notification
-        toast.success("Amazing alert content added with success!");
+        // Afficher la notification de toast
+        toast.success(t("productAdded"));
     };
 
     const isItemInCart = (id) => {
@@ -56,17 +58,15 @@ const AllProducts = () => {
         <div className="flex flex-col md:flex-row">
             {/* Sidebar Filters */}
             <div className="w-full md:w-64 p-4 mt-4 md:mt-44 rounded-sm shadow-md border-r border-gray-300 h-full md:h-screen">
-                <h2 className="text-lg font-bold mb-4">Filtres</h2>
+                <h2 className="text-lg font-bold mb-4">{t("filters")}</h2>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Catégorie</label>
+                    <label className="block text-sm font-medium mb-2">{t("category")}</label>
                     {["All", "Headphones", "Earbuds", "Earphones", "Neckbands"].map((category) => (
                         <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`block w-full text-left p-2 rounded ${
-                                selectedCategory === category ? "bg-gray-600 text-white" : "bg-gray-200"
-                            }`}
+                            className={`block w-full text-left p-2 rounded ${selectedCategory === category ? "bg-gray-600 text-white" : "bg-gray-200"}`}
                         >
                             {category}
                         </button>
@@ -74,7 +74,7 @@ const AllProducts = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Prix</label>
+                    <label className="block text-sm font-medium mb-2">{t("price")}</label>
                     <input
                         type="range"
                         min="0"
@@ -89,19 +89,15 @@ const AllProducts = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Marques</label>
+                    <label className="block text-sm font-medium mb-2">{t("brands")}</label>
                     {["JBL", "boAt", "Sony"].map((brand) => (
                         <button
                             key={brand}
                             onClick={() => toggleBrand(brand)}
-                            className={`block w-full text-left p-2 rounded ${
-                                selectedBrands.includes(brand) ? "bg-gray-600 text-white" : "bg-gray-200"
-                            }`}
+                            className={`block w-full text-left p-2 rounded ${selectedBrands.includes(brand) ? "bg-gray-600 text-white" : "bg-gray-200"}`}
                         >
                             <span
-                                className={`inline-block w-4 h-4 mr-2 rounded-full ${
-                                    selectedBrands.includes(brand) ? "bg-white" : "bg-transparent border border-black"
-                                }`}
+                                className={`inline-block w-4 h-4 mr-2 rounded-full ${selectedBrands.includes(brand) ? "bg-white" : "bg-transparent border border-black"}`}
                             ></span>
                             {brand}
                         </button>
@@ -109,22 +105,22 @@ const AllProducts = () => {
                 </div>
 
                 <div className="m-4">
-                    <label className="block text-sm font-medium mb-2">Trier par prix</label>
+                    <label className="block text-sm font-medium mb-2">{t("sortByPrice")}</label>
                     <select
                         value={orderBy}
                         onChange={(e) => setOrderBy(e.target.value)}
                         className="w-full p-2 border rounded"
                     >
-                        <option value="">Aucun</option>
-                        <option value="asc">Croissant</option>
-                        <option value="desc">Décroissant</option>
+                        <option value="">{t("none")}</option>
+                        <option value="asc">{t("ascending")}</option>
+                        <option value="desc">{t("descending")}</option>
                     </select>
                 </div>
             </div>
 
             <div className="flex-1 p-4">
                 <h1 className="text-slate-500 font-semibold text-light p-4 rounded-md mt-20 mb-5 text-3xl">
-                    Tous les produits
+                    {t("allProducts")}
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProducts.map((product) => (
@@ -137,7 +133,7 @@ const AllProducts = () => {
                                 />
                                 <h2 className="font-bold text-lg">{product.title}</h2>
                                 <p className="text-gray-600">{product.info}</p>
-                                <p className="text-green-600 font-semibold">Prix : {product.finalPrice}€</p>
+                                <p className="text-green-600 font-semibold">{t("price")}: {product.finalPrice}€</p>
                             </Link>
 
                             <button
@@ -148,7 +144,7 @@ const AllProducts = () => {
                                         : "bg-slate-600 hover:bg-slate-300"
                                 }`}
                             >
-                                {isItemInCart(product.id) ? "Added" : "Add To Cart"}
+                                {isItemInCart(product.id) ? t("added") : t("addToCart")}
                             </button>
                         </div>
                     ))}

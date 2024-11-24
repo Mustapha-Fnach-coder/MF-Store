@@ -2,13 +2,15 @@ import Slider from 'react-slick';
 import useFetchData from '/public/data/DATA.JS';
 import { CartContext } from "../context/cartcontexte"; 
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next'; // Importer le hook pour la traduction
 
 import 'react-toastify/dist/ReactToastify.css';  
 
 export default function Products() {
     const { data } = useFetchData();
     const { state, dispatch } = useContext(CartContext); 
-    
+    const { t } = useTranslation(); // Utilisation du hook de traduction
+
     const handleAddItem = (item) => {
         dispatch({
             type: "ADD_TO_CART",
@@ -21,7 +23,6 @@ export default function Products() {
         return state.items.some((item) => item.id === id);
     };
 
-    
     const settings = {
         dots: true,
         infinite: true,
@@ -58,7 +59,7 @@ export default function Products() {
     return (
         <>
         <h1 className='text-slate-500 font-semibold text-light p-4 rounded-md mt-20 mb-5 text-3xl'>
-            The Best Products This Month
+            {t('bestProducts')}
         </h1>
         <hr />
         <Slider {...settings}>
@@ -68,11 +69,11 @@ export default function Products() {
 
                     return (
                         <div key={id} className="flex justify-center items-center p-4">
-                            <div className="bg-white shadow-lg rounded-lg flex flex-col items-center justify-between p-6 transition-transform transform hover:scale-105">
+                            <div className=" rounded-lg flex flex-col items-center justify-between p-6 transition-transform transform hover:scale-105">
                                 <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
                                 <h2 className="hero_price text-xl font-bold text-green-600 mt-4">
-                                    {finalPrice} $ / 
-                                    <small><del>{originalPrice} $</del></small>
+                                    {finalPrice} {t('price')} / 
+                                    <small><del>{originalPrice} {t('price')}</del></small>
                                 </h2>
                                 <figure className="hero_item_img mt-4">
                                     <img className="w-40 h-40 object-cover rounded-md" src={images[0]} alt="product-img" />
@@ -85,7 +86,7 @@ export default function Products() {
                                             : "bg-slate-600 hover:bg-slate-300"
                                     }`}
                                 >
-                                    {isItemInCart(item.id) ? "Added" : "Add To Cart"}
+                                    {isItemInCart(item.id) ? t('added') : t('addToCart')}
                                 </button>
                             </div>
                         </div>

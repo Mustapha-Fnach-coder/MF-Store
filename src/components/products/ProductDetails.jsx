@@ -1,29 +1,27 @@
 import { useParams } from "react-router-dom";
 import useFetchData from '/public/data/DATA.JS'
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next'; // Import de useTranslation
 
 const ProductDetails = () => {
-  const { id } = useParams(); 
-  const { data } = useFetchData(); 
+  const { id } = useParams();
+  const { data } = useFetchData();
+  const { t } = useTranslation(); // Utilisation du hook useTranslation
 
-  
   const product = data ? data.find((item) => item.id === parseInt(id)) : null;
 
-  
   const [selectedImage, setSelectedImage] = useState(
     product ? product.images[0] : null
   );
 
-  
   useEffect(() => {
     if (product) {
       setSelectedImage(product.images[0]);
     }
   }, [product]);
 
-  
   if (!product) {
-    return <p>Loading product details...</p>;
+    return <p>{t("loadingProduct")}</p>; // Texte traduit pour le chargement
   }
 
   return (
@@ -31,11 +29,11 @@ const ProductDetails = () => {
       {/* Colonne de gauche : Informations sur le produit */}
       <div className="md:w-1/3 border-b md:border-r pb-6 md:pb-0 md:pr-6">
         <h2 className="text-2xl font-bold mb-4">{product.title}</h2>
-        <p className="text-sm text-gray-500">Brand: {product.brand}</p>
+        <p className="text-sm text-gray-500">{t("brand")}: {product.brand}</p> {/* Traduction */}
         <p className="text-gray-600 mb-2">{product.info}</p>
-        <p className="text-sm text-gray-500">Category: {product.category}</p>
-        <p className="text-sm text-gray-500">Type: {product.type}</p>
-        <p className="text-sm text-gray-500">Connectivity: {product.connectivity}</p>
+        <p className="text-sm text-gray-500">{t("category")}: {product.category}</p> {/* Traduction */}
+        <p className="text-sm text-gray-500">{t("type")}: {product.type}</p> {/* Traduction */}
+        <p className="text-sm text-gray-500">{t("connectivity")}: {product.connectivity}</p> {/* Traduction */}
         <div className="mt-4">
           <p className="text-lg font-semibold text-red-500">
             ${product.finalPrice}
@@ -45,11 +43,10 @@ const ProductDetails = () => {
           </p>
         </div>
         <p className="text-sm text-gray-500 mt-4">
-          Ratings: {product.rateCount} stars ({product.ratings} reviews)
-        </p>
+          {t("ratings")}: {product.rateCount} {t("stars")} ({product.ratings} {t("reviews")})
+        </p> 
       </div>
 
-     
       <div className="md:w-1/2 flex justify-center items-center mb-6 md:mb-0">
         <img
           src={selectedImage}
@@ -59,7 +56,7 @@ const ProductDetails = () => {
       </div>
 
       
-      <div className="md:w-1/4 flex flex-row md:flex-col justify-center gap-4 md:gap-6">
+      <div className="md:w-1/4 flex flex-wrap justify-center gap-4 md:flex-col md:gap-6">
         {product.images.map((image, index) => (
           <img
             key={index}
@@ -69,7 +66,7 @@ const ProductDetails = () => {
               selectedImage === image
                 ? "border-blue-500"
                 : "border-gray-300 hover:border-gray-400"
-            }`}
+            } sm:w-1/2`}
             onClick={() => setSelectedImage(image)}
           />
         ))}
